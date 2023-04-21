@@ -23,19 +23,33 @@ int HardDifficultyNumberGen() {
 }
 
 void sortVectors(vector<string>& userNames, vector<int>& userScores){
-    for (int i = 0; i < userScores.size() - 1; i++){
+    for (int i = 0; i < userScores.size() -1; i++){
         int maxIndex = i;
         for (int j = i + 1; j < userScores.size(); j++) {
             if (userScores.at(j) > userScores.at(maxIndex)) {
                 maxIndex = j;
             }
+        }
         swap(userScores.at(maxIndex), userScores.at(i));
         swap(userNames.at(maxIndex), userNames.at(i));
-        }
     }
 }
 
+void unitTest(){
+    vector<string> userNamesTest = {"Billy Bob", "Logano", "Levi", "Jimy", "Buster"};
+    vector<int> userScoresTest = {8, 10, 6, 5, 9};
+    
+    vector<string> userNamesTestCorrect = {"Logano", "Buster", "Billy Bob", "Levi", "Jimy"};
+    vector<int> userScoresTestCorrect = {10, 9, 8, 6, 5};
+    
+    sortVectors(userNamesTest, userScoresTest);
+
+    assert(userNamesTest == userNamesTestCorrect && userScoresTest == userScoresTestCorrect);
+}
+
 int main() {
+    unitTest();
+    
 	enum DifficultyOptions { D_EASY, D_MEDIUM, D_HARD };
 	srand(time(0));
 	
@@ -83,10 +97,10 @@ int main() {
 	    	}
 
 	    	if (difficulty == D_MEDIUM) {
-			randomNum = MediumDifficultyNumberGen();
-			randomNum2 = MediumDifficultyNumberGen();
-			cout << randomNum << " + " << randomNum2 << " = ?" << endl;
-	    	}
+    			randomNum = MediumDifficultyNumberGen();
+    			randomNum2 = MediumDifficultyNumberGen();
+    			cout << randomNum << " + " << randomNum2 << " = ?" << endl;
+	    	} 
 
 	    	if (difficulty == D_HARD) {
 		    	randomNum = HardDifficultyNumberGen();
@@ -109,8 +123,8 @@ int main() {
 		    		numCorrect += 1;
 		    	}
 		    	else{
-				cout << "Incorrect, the correct answer was " << randomNum + randomNum2 << endl;
-				cout << "Next question" << endl;
+    				cout << "Incorrect, the correct answer was " << randomNum + randomNum2 << endl;
+    				cout << "Next question" << endl;
 			    }
 	    	}
     	}
@@ -130,8 +144,11 @@ int main() {
     	    cout << "Please enter your name" << endl;
     	    string userName;
     	    cin >> userName;
+    	    cout << endl;
     	    userNames.push_back(userName);
     	    userScores.push_back(numCorrect);
+    	    
+    	    sortVectors(userNames, userScores);
     	    
     	    numCorrect = 0;
     	}
