@@ -88,6 +88,7 @@ int main() {
 	    else {
 	    	cout << "Invalid difficulty" << endl;
 	    }
+	    cout << endl;
 
 	    for (i = 0; i < 10; i++){
 	    	if (difficulty == D_EASY) {
@@ -128,6 +129,7 @@ int main() {
 			    }
 	    	}
     	}
+    	cout << endl;
 	
     	if (numCorrect > 0 && numCorrect < 10) {
 	    	cout << "You got " << numCorrect << " questions correct!";
@@ -147,8 +149,6 @@ int main() {
     	    cout << endl;
     	    userNames.push_back(userName);
     	    userScores.push_back(numCorrect);
-    	    
-    	    sortVectors(userNames, userScores);
     	    
     	    numCorrect = 0;
     	}
